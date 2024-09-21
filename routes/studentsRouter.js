@@ -13,8 +13,11 @@ studentsRouter.get("/", (req, res) => {
     if(students.length === 0 ){
         for (let index = 0; index < limit; index++){
             students.push({
-                id: faker.datatype.uuid(),
-                name: faker.name.firstName()
+                matricula: faker.string.alphanumeric(6),
+                nombre: faker.person.fullName(),
+                carrera: faker.helpers.arrayElement(["Ingeniería en Sistemas", "Ingeniería Automotriz", "Ingeniería Bioquimica", "Ingeniería Industrial"]),
+                edad: faker.number.int({ min: 18, max: 30 }),
+                genero: faker.helpers.arrayElement(["Masculino", "Femenino", "Otro"])
             });
         }
     }
