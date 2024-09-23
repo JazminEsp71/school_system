@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { subjects } from './arrays.js';
 import express from 'express';
 
 const studentsRouter = express.Router();
@@ -17,7 +18,10 @@ studentsRouter.get("/", (req, res) => {
                 nombre: faker.person.fullName(),
                 carrera: faker.helpers.arrayElement(["Ingeniería en Sistemas", "Ingeniería Automotriz", "Ingeniería Bioquimica", "Ingeniería Industrial"]),
                 edad: faker.number.int({ min: 18, max: 30 }),
-                genero: faker.helpers.arrayElement(["Masculino", "Femenino", "Otro"])
+                genero: faker.helpers.arrayElement(["Masculino", "Femenino", "Otro"]),
+                materia1: faker.helpers.arrayElement(subjects).nombre,
+                materia2: faker.helpers.arrayElement(subjects).nombre,
+                materia3: faker.helpers.arrayElement(subjects).nombre,
             });
         }
     }
