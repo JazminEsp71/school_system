@@ -21,7 +21,7 @@ function roomsFunction(){
     const size = 20;
     for(let index = 0; index < size; index++){
         rooms_array.push({
-            numeroAula: faker.number.int({ min: 100, max: 500 }),
+            numAula: faker.number.int({ min: 100, max: 500 }),
             edificio: faker.helpers.arrayElement(["Edificio A", "Edificio B", "Edificio C", "Edificio D"]),
         });
     }
@@ -38,8 +38,8 @@ function subjectsFunction(){
             nombre: faker.helpers.arrayElement(["Matemáticas", "Historia", "Ciencias", "Lenguaje"]),
             profesor: faker.person.fullName(),
             aula: faker.number.int({ min: 100, max: 500 }),
-            teacher_id: teachers[index % teachers.length].id,
-            room_id: rooms[index % rooms.length].id
+            teacher_id: teachers[index % teachers.length],
+            room_id: rooms[index % rooms.length]
         });
     }
     return subjects_array;
