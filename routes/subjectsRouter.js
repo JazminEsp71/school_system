@@ -42,6 +42,46 @@ subjectsRouter.get("/rooms/:numAula", (req, res) => {
     }else{
         res.send("Errooooooooor :0->-< !!!!")
     }
+});
+
+//  Agregar
+subjectsRouter.post("/", (req, res) =>{
+    const {id, nombre, profesor, aula, teacher_id, room_id} = req.body;
+
+    //  valida
+    if(!id || !nombre || !profesor || !aula || !teacher_id || !room_id){
+        return res.status(400).json({error:"Incomplete data"})
+    }
+
+    const newSubject = {
+        id, nombre, profesor, aula, teacher_id, room_id
+    };
+
+    subjects.push(newSubject);
+
+    res.status(201).json({message:"successful", data:newSubject});
+});
+
+//  Moldificar datos de materia
+subjectsRouter.patch("/:id", (req, res) =>{
+    const {id} = req.params;
+    const {nombre, profesor, aula, teacher_id, room_id} = req.body;
+
+    //  Identifica
+    const subject = subjects.find((subject) => subject.id === id)
+
+    if(!subject){
+        return res.status(404).json({error: "Not stored"})
+    }
+
+    //  Actualiza
+    if(nombre) subject.nombre = nombre;
+    if(profesor) subject.profesor = profesor;
+    if(aula) subject.aula = aula;
+    if(teacher_id) subject.teacher_id = teacher_id;
+    if(room_id) subject.room_id = room_id;
+
+    res.json({message: "successful", data:student})
 })
 
 export default subjectsRouter;

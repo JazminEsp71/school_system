@@ -74,10 +74,34 @@ studentsRouter.post("/", (req, res) =>{
         matricula, nombre, carrera, edad, genero, materia1, materia2, materia3
     };
 
-    students.push(newStudent);
+    students.push(newStudent)
 
-    res.status(201).json({message:"successful", data:newStudent,});
+    res.status(201).json({message:"successful", data:newStudent})
 });
+
+// Modificar datos de estudiante
+studentsRouter.patch("/:matricula", (req, res) => {
+    const {matricula} = req.params;
+    const{nombre, carrera, edad, genero, materia1, materia2, materia3} = req.body;
+
+    // Identifica
+    const student = students.find((student) => student.matricula === matricula)
+
+    if(!student){
+        return res.status(404).json({error: "Not stored"})
+    }
+
+    //  Actualiza 
+    if(nombre) student.nombre = nombre;
+    if(carrera) student.carrera = carrera;
+    if(edad) student.edad = edad;
+    if(genero) student.genero = genero;
+    if(materia1) student.materia1 = materia1;
+    if(materia2) student.materia2 = materia2;
+    if(materia3) student.materia3 = materia3;
+
+    res.json({message: "successful", data:student})
+})
 
 // Exportar el router como predeterminado
 export default studentsRouter;

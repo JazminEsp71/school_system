@@ -16,8 +16,44 @@ roomsRouter.get("/:numAula", (req, res) => {
     if(roomsFunction){
         res.json(roomsFunction);
     } else {
-        res.send("Errooooooooor :0->-< !!!!");
+        res.send("Error");
     }
 });
 
+//  Agregar
+roomsRouter.post("/", (req, res) => {
+    const{numAula, edificio} = req.body;
+
+    //  Valida
+    if( !numAula || !edificio){
+        return res.status(400).json({error: "Incomplete data"})
+    }
+
+    const newRoom = {
+        numAula, edificio
+    }
+
+    rooms.push(newRoom)
+
+    res.status(201).json({message: "successful", data:newRoom})
+})
+
+//  Modificar datos de aulas
+roomsRouter.patch("/:numAula", (req, res) => {
+     const {numAula} = req.params;
+     const {edificio} = req.body;
+
+     //  Idenifica
+     const room = rooms.find((teacher) => room.numAula = numAula)
+
+    if(!room){
+        return res.status(404).json({error: "Not stored"})
+    }
+
+    //  Actualiza
+    if(edificio) room.edificio = edificio;
+
+    res.json({message: "successful", data:room})
+    })
+// Exportar el router como predeterminado
 export default roomsRouter;
