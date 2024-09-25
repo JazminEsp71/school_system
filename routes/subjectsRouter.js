@@ -1,4 +1,3 @@
-import { faker } from "@faker-js/faker";
 import express from 'express';
 import { subjects, teachers, rooms } from './arrays.js'
 
@@ -16,7 +15,7 @@ subjectsRouter.get("/:id", (req, res) => {
     if(subjectsFunction){
         res.json(subjectsFunction);
     } else {
-        res.send("Errooooooooor :0->-< !!!!");
+        res.send("Error");
     }
 });
 
@@ -28,7 +27,7 @@ subjectsRouter.get("/teachers/:idProfesor", (req, res) => {
     if(viewTeacher){
         res.json(viewTeacher);
     }else{
-        res.send("Errooooooooor :0->-< !!!!")
+        res.send("Error")
     }
 });
 
@@ -40,7 +39,7 @@ subjectsRouter.get("/rooms/:numAula", (req, res) => {
     if(viewAula){
         res.json(viewAula);
     }else{
-        res.send("Errooooooooor :0->-< !!!!")
+        res.send("Error")
     }
 });
 
@@ -50,7 +49,7 @@ subjectsRouter.post("/", (req, res) =>{
 
     //  valida
     if(!id || !nombre || !profesor || !aula || !teacher_id || !room_id){
-        return res.status(400).json({error:"Incomplete data"})
+        return res.json({error:"Incomplete data"})
     }
 
     const newSubject = {
@@ -59,7 +58,7 @@ subjectsRouter.post("/", (req, res) =>{
 
     subjects.push(newSubject);
 
-    res.status(201).json({message:"successful", data:newSubject});
+    res.json({message:"successful", data:newSubject});
 });
 
 //  Moldificar datos de materia
@@ -71,7 +70,7 @@ subjectsRouter.patch("/:id", (req, res) =>{
     const subject = subjects.find((subject) => subject.id === id)
 
     if(!subject){
-        return res.status(404).json({error: "Not stored"})
+        return res.json({error: "Not stored"})
     }
 
     //  Actualiza

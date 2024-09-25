@@ -1,4 +1,3 @@
-import { faker } from "@faker-js/faker";
 import { rooms } from './arrays.js';
 import express from 'express';
 
@@ -26,7 +25,7 @@ roomsRouter.post("/", (req, res) => {
 
     //  Valida
     if( !numAula || !edificio){
-        return res.status(400).json({error: "Incomplete data"})
+        return res.json({error: "Incomplete data"})
     }
 
     const newRoom = {
@@ -35,7 +34,7 @@ roomsRouter.post("/", (req, res) => {
 
     rooms.push(newRoom)
 
-    res.status(201).json({message: "successful", data:newRoom})
+    res.json({message: "successful", data:newRoom})
 })
 
 //  Modificar datos de aulas
@@ -47,7 +46,7 @@ roomsRouter.patch("/:numAula", (req, res) => {
      const room = rooms.find((teacher) => room.numAula = numAula)
 
     if(!room){
-        return res.status(404).json({error: "Not stored"})
+        return res.json({error: "Not stored"})
     }
 
     //  Actualiza

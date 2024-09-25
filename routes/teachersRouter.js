@@ -24,7 +24,7 @@ teachersRouter.post("/", (req, res) => {
     const {idProfesor, nombre, carrera, turno} = req.body;
 
     if(!idProfesor || !nombre || !carrera || !turno){
-        return res.status(400).json({error: "Incomplete data"})
+        return res.json({error: "Incomplete data"})
     }
 
     const newTeacher = {
@@ -45,7 +45,7 @@ teachersRouter.patch("/:idProfesor", (req, res) => {
     const teacher = teachers.find((teacher) => teacher.idProfesor === idProfesor)
 
     if(!teacher){
-        return res.status(404).json({error: "Not stored"})
+        return res.json({error: "Not stored"})
     }
 
     // Actualiza

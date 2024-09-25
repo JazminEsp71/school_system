@@ -33,7 +33,7 @@ studentsRouter.get("/:matricula", (req, res) =>{
     if(viewStudent){
         res.json(viewStudent);
     } else{
-        res.send("Errooooooooor :0->-< !!!!")
+        res.send("Error")
     }
 });
 
@@ -45,7 +45,7 @@ studentsRouter.get("/subjects/:id", (req, res) => {
     if(viewSubject){
         res.json(viewSubject);
     }else {
-        res.send("Errooooooooor :0->-< !!!!")
+        res.send("Error")
     }
 });
 
@@ -57,7 +57,7 @@ studentsRouter.get("/rooms/:numAula", (req, res) => {
     if(roomsFunction){
         res.json(roomsFunction);
     } else {
-        res.send("Errooooooooor :0->-< !!!!");
+        res.send("Error");
     }
 });
 
@@ -67,7 +67,7 @@ studentsRouter.post("/", (req, res) =>{
 
     // Valida
     if(!matricula || !nombre || !carrera || !edad || !genero || !materia1 || !materia2 || !materia3){
-        return res.status(400).json({error: "Incomplete data"})
+        return res.json({error: "Incomplete data"}) 
     }
 
     const newStudent = {
@@ -76,7 +76,7 @@ studentsRouter.post("/", (req, res) =>{
 
     students.push(newStudent)
 
-    res.status(201).json({message:"successful", data:newStudent})
+    res.json({message:"successful", data:newStudent})
 });
 
 // Modificar datos de estudiante
@@ -88,7 +88,7 @@ studentsRouter.patch("/:matricula", (req, res) => {
     const student = students.find((student) => student.matricula === matricula)
 
     if(!student){
-        return res.status(404).json({error: "Not stored"})
+        return res.json({error: "Not stored"})
     }
 
     //  Actualiza 
